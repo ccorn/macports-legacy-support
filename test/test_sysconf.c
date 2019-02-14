@@ -16,14 +16,15 @@
  */
 
 /*
- * Deliberately declaring some potentially redefined names
- * before including the associated header file, to test robustness.
+ * Deliberately declaring different same-named objects (struct fields)
+ * before including the wrapped header file, and using them after that.
+ * This is likely to reveal flaws of less subtle wrapping methods.
  */
 
 /* Wrapper should work not only with calls, but with references as well */
 typedef long (*itol_t)(int);
 
-/* Renaming different objects should not affect functionality */
+/* Using different same-named objects should not affect functionality */
 typedef struct { long sysconf; } scv_t;
 typedef struct { itol_t sysconf; } scf_t;
 

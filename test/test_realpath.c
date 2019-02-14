@@ -16,15 +16,16 @@
  */
 
 /*
- * Deliberately declaring some potentially redefined names
- * before including the associated header file, to test robustness.
+ * Deliberately declaring different same-named objects (struct fields)
+ * before including the wrapped header file, and using them after that.
+ * This is likely to reveal flaws of less subtle wrapping methods.
  */
 
 /* Wrapper should work not only with calls, but with references as well */
 /* __restrict not needed here (and remember: nothing included yet) */
 typedef char * (*strfunc_t)(const char *, char *);
 
-/* Renaming different objects should not affect functionality */
+/* Using different same-named objects should not affect functionality */
 typedef struct { char *realpath; } rpv_t;
 typedef struct { strfunc_t realpath; } rpf_t;
 
